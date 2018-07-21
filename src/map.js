@@ -12,14 +12,15 @@ export function initMap(ymaps, containerId) {
   const objectManager = new ymaps.ObjectManager({
     clusterize: true,
     gridSize: 64,
-    clusterIconLayout: 'default#pieChart',
+    clusterIconLayout: "default#pieChart",
     clusterDisableClickZoom: false,
     geoObjectOpenBalloonOnClick: false,
     geoObjectHideIconOnBalloonOpen: false,
     geoObjectBalloonContentLayout: getDetailsContentLayout(ymaps)
   });
 
-  objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+  //objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+  myMap.geoObjects.add(objectManager);
 
   loadList().then(data => {
     objectManager.add(data);
@@ -27,8 +28,8 @@ export function initMap(ymaps, containerId) {
 
   // details
   objectManager.objects.events.add('click', event => {
-    const objectId = event.get('objectId');
-    const obj = objectManager.objects.getById(objectId);
+    var objectId = event.get('objectId');
+    var obj = objectManager.objects.getById(objectId);
 
     objectManager.objects.balloon.open(objectId);
 
